@@ -82,13 +82,33 @@ class Proxy(Resource):
         log.debug("receive params: {}".format(options))
 
         item = proxy_manager.getSampleUsefulProxy(**options)
-        if item:
-            del item["_id"]
 
         result["data"] = item
 
         return result
+class deleteProxy(Resource):
+    def __init__(self, **kwargs):
+        super(Proxy, self).__init__(**kwargs)
 
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', type=str, choices=[1], location='args')
+        self.args = parser.parse_args()
+
+    def get(self):
+        result = {
+            "data": {}
+        }
+
+        options = {
+            "id": self.args.get('id'),
+        }
+        log.debug("receive params: {}".format(options))
+
+        item = proxy_manager.deleteRawProxy(**options)
+
+        result["data"] = item
+
+        return result
 
 class Proxies(Resource):
     def __init__(self, **kwargs):
@@ -140,4 +160,6 @@ def init_app(app):
     api = Api(app)
     api.add_resource(Proxies, '/api/v1/proxies/')
     api.add_resource(Proxy, '/api/v1/proxy/')
+    api.add_resource(deleteProxy, '/api/v1/proxy/delete')
+    
     api.add_resource(ApiList, '/api/v1/')
