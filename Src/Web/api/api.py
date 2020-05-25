@@ -82,7 +82,8 @@ class Proxy(Resource):
         log.debug("receive params: {}".format(options))
 
         item = proxy_manager.getSampleUsefulProxy(**options)
-
+        if item:
+            del item["_id"]
         result["data"] = item
 
         return result
