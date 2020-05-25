@@ -107,7 +107,7 @@ class deleteProxy(Resource):
         }
         log.debug("receive params: {}".format(options))
 
-        item = proxy_manager.deleteUsefulProxy(**options)
+        item = proxy_manager.deleteUsefulProxy(options)
 
         result["data"] = item
 
