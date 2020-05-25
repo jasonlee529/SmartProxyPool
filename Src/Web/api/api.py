@@ -89,10 +89,11 @@ class Proxy(Resource):
         return result
 class deleteProxy(Resource):
     def __init__(self, **kwargs):
-        super(Proxy, self).__init__(**kwargs)
+        super(deleteProxy, self).__init__(**kwargs)
 
         parser = reqparse.RequestParser()
-        parser.add_argument('id', type=str, choices=[1], location='args')
+        parser.add_argument('host', type=str, choices=[1], location='args')
+        parser.add_argument('port', type=str, choices=[1], location='args')
         self.args = parser.parse_args()
 
     def get(self):
@@ -101,11 +102,12 @@ class deleteProxy(Resource):
         }
 
         options = {
-            "id": self.args.get('id'),
+            "host": self.args.get('host'),
+            "port": self.args.get('port'),
         }
         log.debug("receive params: {}".format(options))
 
-        item = proxy_manager.deleteRawProxy(**options)
+        item = proxy_manager.deleteUsefulProxy(**options)
 
         result["data"] = item
 
