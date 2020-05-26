@@ -92,8 +92,8 @@ class deleteProxy(Resource):
         super(deleteProxy, self).__init__(**kwargs)
 
         parser = reqparse.RequestParser()
-        parser.add_argument('host', type=str, choices=[1], location='args')
-        parser.add_argument('port', type=str, choices=[1], location='args')
+        parser.add_argument('host', type=str, location='args')
+        parser.add_argument('port', type=str, location='args')
         self.args = parser.parse_args()
 
     def get(self):
