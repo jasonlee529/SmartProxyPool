@@ -105,10 +105,10 @@ class deleteProxy(Resource):
             "host": self.args.get('host'),
             "port": self.args.get('port'),
         }
-        log.debug("receive params: {}".format(options))
+        log.info("receive params: {}".format(options))
 
         item = proxy_manager.deleteUsefulProxy(options)
-
+        log.info("delete {}".format(item))
         result["data"] = item
 
         return result

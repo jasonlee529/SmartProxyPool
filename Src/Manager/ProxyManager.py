@@ -107,6 +107,7 @@ class ProxyManager(object):
         return result
 
     def deleteRawProxy(self, proxy):
+        log.info(proxy)
         self.raw_proxy.deleteRawProxy(proxy)
 
     def saveRawProxy(self, proxy):
