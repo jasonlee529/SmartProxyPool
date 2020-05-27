@@ -102,10 +102,11 @@ class deleteProxy(Resource):
 
         options = {
             "proxy": self.args.get('proxy'),
+            "quality":-1
         }
         log.info("receive params: {}".format(options))
-
-        item = proxy_manager.deleteUsefulProxy(self.args.get('proxy'))
+        info={}
+        item = proxy_manager.updateUsefulProxy(options, info)
         log.info("delete {}".format(item))
         result["data"] = item
 

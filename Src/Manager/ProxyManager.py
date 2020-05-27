@@ -160,6 +160,9 @@ class ProxyManager(object):
         if item.get("https") == PROXY_HTTPS["UNKNOWN"]:
             data["$set"]["https"] = info["https"]
 
+        if item.get("quality"):
+            data["$set"]["quality"] = -1
+
         if len(data["$set"]) > 0:
             self.useful_proxy.updateUsefulProxy(item["proxy"], data)
 
